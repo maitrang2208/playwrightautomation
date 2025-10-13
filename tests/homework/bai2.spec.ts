@@ -10,3 +10,5 @@
   await page.getByRole('button', { name: 'Tiếp tục' }).click();
   await expect(page.getByRole('heading', { name: 'Chào mừng bạn đã quay trở lại!' })).toBeVisible();
   })
+
+  //bài làm tốt đã đáp ứng yêu cầu đề ra là có autowaiting và web first assertion 
