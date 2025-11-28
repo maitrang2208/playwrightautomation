@@ -16,7 +16,6 @@ function infomation() {
     currency: 'USD',
     country: 'Vietnam',
     companyName: `Auto Company ${format(new Date(), 'HH:mm:ss')}`,
- 
   };
 }
 async function loginCRMAndNavigateToCustomer(page: Page, tabName: String) {
@@ -31,7 +30,6 @@ async function loginCRMAndNavigateToCustomer(page: Page, tabName: String) {
   await customersMenu.click();
   await page.getByRole('link', { name: 'New Customer' }).click();
 }
-
 test.describe('CRM customer - Positive case', () => {
   test('TC_CUST_02- tạo Customer (Nhập tất cả trường)', async ({ page }) => {
     const information = infomation();
@@ -219,7 +217,8 @@ test.describe('CRM customer - Negative case', () => {
     })
     await test.step('5. Nhập lại tên công ty đã tạo', async () => {
         await page.locator('#company').fill(information.companyName);
-        await page.keyboard.press('Tab');
+        //await page.keyboard.press('Tab');
+        await page.locator('#company').blur();
         await expect(page.locator('#company_exists_info')).toContainText(`It looks that a customer with name ${information.companyName} already exists, if you still want to create the customer you can ignore this message.`)
     })
   });
