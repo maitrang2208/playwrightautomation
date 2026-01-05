@@ -19,6 +19,10 @@ export const test = base.extend<MyFixtures>({
     customersPage: async ({ page }, use) => {  
     const customersPage = new CRMCustomerPage(page);
     await use(customersPage);
-  }         
+  } ,
+  newCustomerPage: async ({ page }, use) => {  
+    const newCustomerPage = new CRMNewCustomerPage(page);
+    await use(newCustomerPage);
+  }        
 });
    
