@@ -43,7 +43,7 @@ test.describe('Login - Positive', () => {
       await page.getByRole('button', { name: 'Login' }).click();
 
       if (data.expectedMessage) {
-        await expect(page.locator('.toast-message')).toHaveText(data.expectedMessage);
+        await expect(page.locator('#swal2-title')).toHaveText(data.expectedMessage);
       }
       if (data.expectedUrl) {
         await expect(page).toHaveURL(data.expectedUrl);
@@ -63,7 +63,7 @@ test.describe('Login - Negative', () => {
       await page.getByRole('button', { name: 'Login' }).click();
 
       if (data.expectedMessage) {
-        await expect(page.locator('.')).toHaveText(data.expectedMessage);
+        await expect(page.locator('.toast-message')).toHaveText(data.expectedMessage);
       }
       await expect(page).not.toHaveURL('https://hrm.anhtester.com/erp/desk');
     });

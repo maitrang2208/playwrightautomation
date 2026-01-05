@@ -5,7 +5,7 @@
       "username": "admin_example",
       "password": "123456",
       "expectedResult": "success",
-      "expectedMessage": "Login successful"
+      "expectedMessage": "Logged In Successfully."
     },
     {
       "id":2,
