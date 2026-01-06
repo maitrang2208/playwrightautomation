@@ -1,10 +1,10 @@
-import { expect, test } from '@playwright/test';
-test.describe('API Homework - Comments', () => {
-  test('POST create comment', { tag: ['@api'] }, async ({ request }) => {
-    const name = '21';
-    const email = 'Eliseo@gardner.biz';
-    const body = 'laudantium enim quasi est quidem magnam voluptate ipsam ';
-    const response = await request.post('/posts/1/comments', {
+import { expect, test } from "@playwright/test";
+test.describe("API Homework - Comments", () => {
+  test("POST create comment", { tag: ["@api"] }, async ({ request }) => {
+    const name = "21";
+    const email = "Eliseo@gardner.biz";
+    const body = "laudantium enim quasi est quidem magnam voluptate ipsam ";
+    const response = await request.post("/posts/1/comments", {
       data: {
         name: name,
         email: email,
@@ -17,3 +17,4 @@ test.describe('API Homework - Comments', () => {
     expect(bodyResponse.name).toBe(name);
   });
 });
+//ok bài làm đúng
