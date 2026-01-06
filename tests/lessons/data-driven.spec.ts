@@ -17,55 +17,90 @@
 //     await expect(page).toHaveURL('https://hrm.anhtester.com/erp/desk');
 //   });
 // }
-import { test, expect } from '@playwright/test';
-import { loginCases } from '../../test-data/login-cases.json';
+import { test, expect } from "@playwright/test";
+import { loginCases } from "../../test-data/login-cases.json";
 
 type LoginCase = {
   id: number;
   username: string;
   password: string;
-  expectedResult?: 'success' | 'error';
+  expectedResult?: "success" | "error";
   expectedMessage?: string;
   expectedUrl?: string;
 };
 
 const testdata = JSON.parse(JSON.stringify(loginCases)) as LoginCase[];
 
-const positive = testdata.filter(c => c.expectedResult === 'success');
-const negative = testdata.filter(c => c.expectedResult === 'error');
+const positive = testdata.filter((c) => c.expectedResult === "success");
+const negative = testdata.filter((c) => c.expectedResult === "error");
 
-test.describe('Login - Positive', () => {
+test.describe("Login - Positive", () => {
   for (const data of positive) {
     test(`TC_LOGIN_POS_${data.id}`, async ({ page }) => {
-      await page.goto('https://hrm.anhtester.com/erp/login');
-      await page.locator('#iusername').fill(data.username);
-      await page.locator('#ipassword').fill(data.password);
-      await page.getByRole('button', { name: 'Login' }).click();
+      await page.goto("https://hrm.anhtester.com/erp/login");
+      await page.locator("#iusername").fill(data.username);
+      await page.locator("#ipassword").fill(data.password);
+      await page.getByRole("button", { name: "Login" }).click();
 
+      //có thể dùng như này .
+      // const targetUrl = data.expectedUrl ? data.expectedUrl : 'https://hrm.anhtester.com/erp/desk';
+      // await expect(page).toHaveURL(targetUrl);
       if (data.expectedMessage) {
-        await expect(page.locator('#swal2-title')).toHaveText(data.expectedMessage);
+        await expect(page.locator("#swal2-title")).toHaveText(
+          data.expectedMessage
+        );
       }
       if (data.expectedUrl) {
         await expect(page).toHaveURL(data.expectedUrl);
       } else {
-        await expect(page).toHaveURL('https://hrm.anhtester.com/erp/desk');
+        await expect(page).toHaveURL("https://hrm.anhtester.com/erp/desk");
       }
     });
   }
 });
 
-test.describe('Login - Negative', () => {
+test.describe("Login - Negative", () => {
   for (const data of negative) {
     test(`TC_LOGIN_NEG_${data.id}`, async ({ page }) => {
-      await page.goto('https://hrm.anhtester.com/erp/login');
-      await page.locator('#iusername').fill(data.username);
-      await page.locator('#ipassword').fill(data.password);
-      await page.getByRole('button', { name: 'Login' }).click();
+      await page.goto("https://hrm.anhtester.com/erp/login");
+      await page.locator("#iusername").fill(data.username);
+      await page.locator("#ipassword").fill(data.password);
+      await page.getByRole("button", { name: "Login" }).click();
 
       if (data.expectedMessage) {
-        await expect(page.locator('.toast-message')).toHaveText(data.expectedMessage);
+        await expect(page.locator(".toast-message")).toHaveText(
+          data.expectedMessage
+        );
       }
-      await expect(page).not.toHaveURL('https://hrm.anhtester.com/erp/desk');
+      await expect(page).not.toHaveURL("https://hrm.anhtester.com/erp/desk");
     });
   }
 });
+
+// Nhớ áp dụng POM nhé.
+
+// nên đổi cấu trúc file json thành
+// {
+//   "allLoginCases": {
+//     "description": "Tất cả test cases login (positive + negative)",
+//     "data": [
+//       {
+//         "id": 1,
+//         "username": "admin_example",
+//         "password": "123456",
+//         "expectedResult": "success",
+//         "expectedMessage": "Logged In Successfully."
+//       },
+//       {
+//         "id": 2,
+//         "username": "user_example",
+//         "password": "password123",
+//         "expectedResult": "error",
+//         "expectedMessage": "Invalid Login Credentials."
+//       }
+//     ]
+//   }
+// }
+
+// và dùng test manager của chúng ta:
+// const testdata = getTestDataSimple('loginCases', 'allLoginCases');
