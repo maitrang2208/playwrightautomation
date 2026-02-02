@@ -1,6 +1,7 @@
   import { test, expect } from '@playwright/test';
   import { stat } from 'node:fs/promises';
   import {format} from 'date-fns';
+  import path from 'path';
 test('ví dụ về upload file', async ({ page }) => {
 
   await page.goto('https://demoapp-sable-gamma.vercel.app/');
@@ -13,7 +14,7 @@ test('ví dụ về upload file', async ({ page }) => {
 
   //PW tự động upload file cho chúng ta -> ok
 
-  await visible.setInputFiles('tests/fixtures/sample1.txt');
+  await visible.setInputFiles(path.join(__dirname, 'test.pdf'));
 
   //div[contains(text(), '1) Input hiển thị') and @class='ant-card-head-title']/ancestor::div[@class='ant-card-head']/following-sibling::div//span
 
@@ -29,7 +30,7 @@ test('ví dụ về upload file', async ({ page }) => {
 
       .nth(1)
 
-  ).toContainText('sample1.txt');
+  ).toContainText('test.pdf');
 
   await page.pause();
 

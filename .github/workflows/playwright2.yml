@@ -1,0 +1,16 @@
+name: Demo Playwright Tests Workflow
+on:
+  push:
+    branches: [main]
+#chạy cái gì
+jobs: 
+  hello:
+    name: Say Hello
+    runs-on: ubuntu-latest
+
+    #steps là các bước chạy trong job
+    steps:
+      - name: Print Hello World
+        run: | 
+          echo "Hello, World!"
+          echo "This is a demo Playwright workflow."
