@@ -60,6 +60,14 @@ export default defineConfig({
       },
       testMatch: '/api/**/*.spec.ts',
     },
+    {
+      name: 'neko-api',
+      use: {
+        browserName: undefined,
+        baseURL: 'https://api-neko-coffee.autoneko.com',
+      },
+      testMatch: '/api/**/*.spec.ts',
+    },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
