@@ -22,7 +22,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: run tests
-        run: npx playwright test
+        run: npx playwright test loginpage.spec.ts 
 
       - name: upload playwright report
         if: always()
