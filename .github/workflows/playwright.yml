@@ -1,5 +1,15 @@
 name: setup playwright test demo 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment'
+        default: 'DEV'
+        type: choice
+        options:
+          - DEV
+          - STAGING
+          - PROD
   push:
     branches: [main]
   pull_request:
