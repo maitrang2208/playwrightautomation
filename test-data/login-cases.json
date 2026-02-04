@@ -1,0 +1,26 @@
+{
+  "loginCases": [
+    {
+      "id":1,
+      "username": "admin_example",
+      "password": "123456",
+      "expectedResult": "success",
+      "expectedMessage": "Logged In Successfully."
+    },
+    {
+      "id":2,
+      "username": "user_example",
+      "password": "password123",
+      "expectedResult": "error",
+      "expectedMessage": "Invalid Login Credentials."
+    },
+    
+    {
+      "id":3,
+      "username": "user_example",
+      "password": "test_pass",
+      "expectedResult": "error",
+      "expectedMessage": "Invalid Login Credentials."
+    }
+  ]
+}

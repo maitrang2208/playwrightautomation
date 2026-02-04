@@ -2,17 +2,26 @@
   "name": "playwrightautomation",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:dev": "cross-env NODE_ENV=development npx playwright test",
+
+    "test:uat": "cross-env NODE_ENV=staging npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.56.0",
-    "@types/node": "^24.7.0"
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
-    "date-fns": "^4.1.0"
+    "cross-env": "^10.1.0",
+    "date-fns": "^4.1.0",
+    "dotenv-flow": "^4.1.0"
   }
 }

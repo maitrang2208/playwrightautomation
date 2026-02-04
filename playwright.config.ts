@@ -1,4 +1,16 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, test as base } from '@playwright/test';
+
+import dotenvflow from 'dotenv-flow';
+import path from 'path';
+
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = 'development';
+}
+
+dotenvflow.config({
+  path: path.resolve(__dirname, 'env'),
+  default_node_env: 'development',
+});
 
 /**
  * Read environment variables from file.
@@ -27,8 +39,8 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    actionTimeout:10000,
-    navigationTimeout:30000,
+    actionTimeout: 10000,
+    navigationTimeout: 30000,
     headless: false,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -40,16 +52,31 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'api',
+      use: {
+        browserName: undefined,
+        baseURL: 'https://jsonplaceholder.typicode.com',
+      },
+      testMatch: '/api/**/*.spec.ts',
     },
-
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'neko-api',
+      use: {
+        browserName: undefined,
+        baseURL: 'https://api-neko-coffee.autoneko.com',
+      },
+      testMatch: '/api/**/*.spec.ts',
     },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
