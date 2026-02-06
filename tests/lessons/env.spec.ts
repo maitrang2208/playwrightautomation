@@ -3,10 +3,10 @@ import { test } from '@playwright/test';
 test('Check env ', async ({ page }) => {
 
   const projectName = process.env.PROJECT_NAME;
-
   const url = process.env.BASE_URL;
 
-  const password = process.env.ADMIN_PASSWORD;
+
+  const password = process.env.PASSWORD;
 
   console.log(`PROJECT ĐANG TEST ${projectName}`);
 
